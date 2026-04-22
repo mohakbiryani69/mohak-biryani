@@ -327,7 +327,7 @@ function placeOrder(){
 
   let subtotal = price * qty;
   let gst = subtotal * 0.05;
-  let delivery = 50;
+  let delivery = 25;
   let total = subtotal + gst + delivery;
 
   invoiceData = {name, qty, subtotal, gst, total};
