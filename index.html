@@ -1,246 +1,192 @@
+
+  
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mohak Biryani | Guwahati</title>
+<title>Mohak Biryani</title>
+
+<!-- 🔥 PDF LIBRARY -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #121212;
-  color: #fff;
+  margin:0;
+  font-family:Arial;
+  background:#0f172a;
+  color:white;
+  scroll-behavior:smooth;
 }
 
-/* Navbar */
-nav {
-  background: linear-gradient(45deg, #8B0000, #ff4d4d);
-  padding: 15px;
-  text-align: center;
-  position: sticky;
-  top: 0;
-}
-nav a {
-  color: white;
-  margin: 12px;
-  text-decoration: none;
-  font-weight: bold;
+.navbar {
+  position:fixed;
+  width:100%;
+  top:0;
+  background:rgba(15,23,42,0.8);
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  z-index:1000;
 }
 
-/* Hero */
+section { padding:100px 20px; }
+
 .hero {
-  height: 350px;
-  background: url('https://images.unsplash.com/photo-1600628422019-5d2c4e0f2f61') center/cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 40px;
-  text-shadow: 2px 2px 15px black;
+  background:url('https://images.unsplash.com/photo-1604908176997-125f25cc6f3d') center/cover;
+  position:relative;
+}
+.hero::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+}
+.hero-content { position:relative; z-index:1; }
+
+.btn {
+  padding:12px 20px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(135deg,#3b82f6,#60a5fa);
+  color:white;
+  cursor:pointer;
+  margin-top:10px;
 }
 
-/* Section */
-.section {
-  padding: 20px;
+.payment-box {
+  background:#1e293b;
+  padding:20px;
+  border-radius:15px;
 }
 
-/* Menu cards */
-.menu {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-}
-.card {
-  background: #1e1e1e;
-  padding: 10px;
-  border-radius: 12px;
-  transition: 0.3s;
-}
-.card:hover {
-  transform: scale(1.05);
-}
-.card img {
-  width: 100%;
-  border-radius: 10px;
+input, select, textarea {
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  border-radius:8px;
+  border:none;
 }
 
-/* Button */
-button {
-  background: linear-gradient(45deg, red, orange);
-  color: white;
-  padding: 12px;
-  border: none;
-  font-size: 16px;
-  border-radius: 6px;
+.fade {
+  opacity:0;
+  transform:translateY(40px);
+  transition:0.8s;
 }
-
-/* Reviews */
-.review {
-  background: #1e1e1e;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-left: 5px solid red;
-  border-radius: 8px;
-}
-
-/* Footer */
-footer {
-  background: black;
-  text-align: center;
-  padding: 10px;
+.fade.show {
+  opacity:1;
+  transform:translateY(0);
 }
 </style>
 </head>
 
 <body>
 
-<nav>
-<a href="#fullmenu">Menu</a>
-<a href="#video">Video</a>
-<a href="#reviews">Reviews</a>
-<a href="#contact">Contact</a>
-</nav>
-
-<div class="hero">
-<div style="
-background: rgba(30,41,59,0.7);
-padding: 30px;
-border-radius: 20px;
-text-align:center;
-backdrop-filter: blur(10px);
-border: 1px solid rgba(148,163,184,0.2);
-box-shadow: 0 8px 30px rgba(0,0,0,0.5);
-">
-
-<h1 style="font-size:38px; margin:0; color:#e2e8f0;">
-Mohak Biryani 🍛
-</h1>
-
-<p style="font-size:16px; margin-top:10px; color:#94a3b8;">
-🔥 Authentic Taste | Premium Dining Experience
-</p>
-
-<p style="margin-top:12px; color:#cbd5e1; font-size:18px;">
-⭐ 4.6 Rating | 800+ Orders
-</p>
-
-<a href="https://wa.me/917488690713">
-<button style="
-margin-top:18px;
-background: linear-gradient(135deg, #3b82f6, #64748b);
-border-radius: 8px;
-padding: 12px 20px;
-">
-Order Now
-</button>
-</a>
-
-</div>
- 
-
-<p>Premium AC restaurant at GS Road, Guwahati. Perfect for parties & family dining.</p>
+<div class="navbar">
+  <h3>Mohak Biryani</h3>
 </div>
 
-<div class="section" id="menu">
-<h2>🍛 Popular Biryani</h2>
+<section class="hero fade">
+  <div class="hero-content">
+    <h1>Mohak Biryani 🍛</h1>
+    <button class="btn" onclick="scrollToSection('order')">Order Now</button>
+  </div>
+</section>
 
-<div class="menu">
+<section id="order" class="fade">
+  <h2>🛒 Place Order</h2>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1600628422019-5d2c4e0f2f61">
-<h3>Chicken Biryani</h3>
-<p>₹180</p>
-</div>
+  <div class="payment-box">
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1598514983318-2f64f8f4796c">
-<h3>Mutton Biryani</h3>
-<p>₹260</p>
-</div>
+    <label>Select Biryani</label>
+    <select id="item">
+      <option value="Chicken Biryani|180">Chicken Biryani - ₹180</option>
+      <option value="Mutton Biryani|260">Mutton Biryani - ₹260</option>
+      <option value="Veg Biryani|140">Veg Biryani - ₹140</option>
+    </select>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1628294895950-9805252327bc">
-<h3>Egg Biryani</h3>
-<p>₹120</p>
-</div>
+    <label>Quantity</label>
+    <input type="number" id="qty" value="1">
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1605478038678-88b1b33b0b3b">
-<h3>Paneer Biryani</h3>
-<p>₹150</p>
-</div>
+    <label>Note</label>
+    <textarea id="note"></textarea>
 
-</div>
-</div>
+    <button class="btn" onclick="placeOrder()">Proceed</button>
 
-<div class="section" id="fullmenu">
-<h2>📜 Full Menu</h2>
+    <div id="invoice" style="margin-top:20px;"></div>
 
-<div style="background:#1e1e1e; padding:15px; border-radius:10px;">
+    <!-- PDF BUTTON -->
+    <button class="btn" onclick="downloadPDF()">Download Invoice PDF</button>
 
-<h3>🍛 Chicken Biryani</h3>
-<p>• Classic Chicken Biryani - ₹180</p>
-<p>• Boneless Chicken Biryani - ₹200</p>
-<p>• Chicken Dum Biryani - ₹220</p>
+  </div>
+</section>
 
-<h3>🍖 Mutton Biryani</h3>
-<p>• Mutton Biryani - ₹260</p>
-<p>• Special Mutton Dum Biryani - ₹280</p>
+<script>
+let invoiceData = {};
 
-<h3>🥚 Egg Biryani</h3>
-<p>• Egg Biryani - ₹120</p>
-<p>• Double Egg Biryani - ₹140</p>
+function scrollToSection(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
 
-<h3>🧀 Veg & Paneer</h3>
-<p>• Veg Biryani - ₹100</p>
-<p>• Paneer Biryani - ₹150</p>
+function placeOrder(){
 
-<h3>🔥 Specials</h3>
-<p>• Hyderabadi Special Biryani - ₹220</p>
-<p>• Family Pack (4 persons) - ₹650</p>
+  let itemData = document.getElementById("item").value.split("|");
+  let name = itemData[0];
+  let price = parseInt(itemData[1]);
 
-</div>
-</div>
+  let qty = parseInt(document.getElementById("qty").value);
+  let note = document.getElementById("note").value;
 
-<div class="section" id="video">
-<h2>🎥 Watch Our Biryani</h2>
+  let subtotal = price * qty;
+  let gst = subtotal * 0.05;
+  let delivery = 50;
+  let total = subtotal + gst + delivery;
 
-<iframe width="100%" height="250"
-src="https://www.youtube.com/embed/6XlMguO9r-M"
-title="Chicken Biryani Recipe"
-frameborder="0" allowfullscreen>
-</iframe>
+  // store data for PDF
+  invoiceData = {name, qty, subtotal, gst, delivery, total};
 
-</div>
+  document.getElementById("invoice").innerHTML = `
+    <h3>🧾 Invoice</h3>
+    Item: ${name}<br>
+    Qty: ${qty}<br>
+    Subtotal: ₹${subtotal}<br>
+    GST: ₹${gst.toFixed(2)}<br>
+    Delivery: ₹50<br>
+    <b>Total: ₹${total.toFixed(2)}</b>
+  `;
 
-<div class="section">
-<h2>📲 Order Now</h2>
-<a href="https://wa.me/917488690713">
-<button>Order on WhatsApp</button>
-</a>
-</div>
+  let msg = `Order:%0A${name}%0AQty:${qty}%0ATotal:₹${total.toFixed(2)}`;
+  window.open(`https://wa.me/917488690713?text=${msg}`);
 
-<div class="section" id="reviews">
-<h2>⭐ Reviews</h2>
+  let upi = `upi://pay?pa=7488690713@ptyes&am=${total.toFixed(2)}&cu=INR`;
+  setTimeout(()=>{ window.location.href = upi; },1500);
+}
 
-<div class="review">🔥 Best biryani in Guwahati! - Rahul</div>
-<div class="review">😍 Amazing taste & ambience - Sneha</div>
-<div class="review">💯 Worth the price - Aman</div>
-<div class="review">🍛 Loved the mutton biryani - Priya</div>
-<div class="review">✨ Clean & AC seating - Rohit</div>
+function downloadPDF(){
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
 
-</div>
+  doc.text("Mohak Biryani Invoice", 20, 20);
+  doc.text(`Item: ${invoiceData.name}`, 20, 40);
+  doc.text(`Quantity: ${invoiceData.qty}`, 20, 50);
+  doc.text(`Subtotal: ₹${invoiceData.subtotal}`, 20, 60);
+  doc.text(`GST: ₹${invoiceData.gst}`, 20, 70);
+  doc.text(`Delivery: ₹50`, 20, 80);
+  doc.text(`Total: ₹${invoiceData.total}`, 20, 90);
 
-<div class="section" id="contact">
-<h2>📍 Contact</h2>
-<p>GS Road, Guwahati</p>
-<p>📞 7488690713</p>
-<p>📧 kishank7488@gmail.com</p>
-</div>
+  doc.save("invoice.pdf");
+}
 
-<footer>
-<p>© Mohak Biryani</p>
-</footer>
+const faders = document.querySelectorAll('.fade');
+
+window.addEventListener('scroll', () => {
+  faders.forEach(el => {
+    if(el.getBoundingClientRect().top < window.innerHeight - 100){
+      el.classList.add('show');
+    }
+  });
+});
+</script>
 
 </body>
 </html>
