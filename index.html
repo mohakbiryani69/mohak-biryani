@@ -1,5 +1,3 @@
-
-  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mohak Biryani</title>
 
-<!-- 🔥 PDF LIBRARY -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
@@ -19,6 +16,7 @@ body {
   scroll-behavior:smooth;
 }
 
+/* NAVBAR */
 .navbar {
   position:fixed;
   width:100%;
@@ -30,8 +28,10 @@ body {
   z-index:1000;
 }
 
+/* SECTIONS */
 section { padding:100px 20px; }
 
+/* HERO */
 .hero {
   background:url('https://images.unsplash.com/photo-1604908176997-125f25cc6f3d') center/cover;
   position:relative;
@@ -44,6 +44,7 @@ section { padding:100px 20px; }
 }
 .hero-content { position:relative; z-index:1; }
 
+/* BUTTON */
 .btn {
   padding:12px 20px;
   border:none;
@@ -54,12 +55,31 @@ section { padding:100px 20px; }
   margin-top:10px;
 }
 
+/* GRID */
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+
+/* CARD */
+.card {
+  background:#1e293b;
+  padding:15px;
+  border-radius:15px;
+  transition:0.3s;
+  text-align:center;
+}
+.card:hover { transform:translateY(-10px); }
+
+/* ORDER BOX */
 .payment-box {
   background:#1e293b;
   padding:20px;
   border-radius:15px;
 }
 
+/* INPUT */
 input, select, textarea {
   width:100%;
   padding:10px;
@@ -68,6 +88,26 @@ input, select, textarea {
   border:none;
 }
 
+/* REVIEWS */
+.review {
+  background:#1e293b;
+  padding:15px;
+  border-radius:15px;
+}
+
+/* FLOAT WA */
+.float-wa {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  padding:15px;
+  border-radius:50%;
+  color:white;
+  text-decoration:none;
+}
+
+/* ANIMATION */
 .fade {
   opacity:0;
   transform:translateY(40px);
@@ -82,22 +122,41 @@ input, select, textarea {
 
 <body>
 
+<!-- NAVBAR -->
 <div class="navbar">
   <h3>Mohak Biryani</h3>
+  <div>
+    <a href="#menu">Menu</a> |
+    <a href="#order">Order</a> |
+    <a href="#reviews">Reviews</a> |
+    <a href="#contact">Contact</a>
+  </div>
 </div>
 
+<!-- HERO -->
 <section class="hero fade">
   <div class="hero-content">
     <h1>Mohak Biryani 🍛</h1>
+    <p>Authentic Taste • Premium Dining</p>
     <button class="btn" onclick="scrollToSection('order')">Order Now</button>
   </div>
 </section>
 
+<!-- MENU -->
+<section id="menu" class="fade">
+  <h2>🍛 Menu</h2>
+  <div class="grid">
+    <div class="card">Chicken Biryani ₹180</div>
+    <div class="card">Mutton Biryani ₹260</div>
+    <div class="card">Veg Biryani ₹140</div>
+  </div>
+</section>
+
+<!-- ORDER -->
 <section id="order" class="fade">
   <h2>🛒 Place Order</h2>
 
   <div class="payment-box">
-
     <label>Select Biryani</label>
     <select id="item">
       <option value="Chicken Biryani|180">Chicken Biryani - ₹180</option>
@@ -115,11 +174,30 @@ input, select, textarea {
 
     <div id="invoice" style="margin-top:20px;"></div>
 
-    <!-- PDF BUTTON -->
     <button class="btn" onclick="downloadPDF()">Download Invoice PDF</button>
-
   </div>
 </section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="fade">
+  <h2>⭐ Reviews</h2>
+  <div class="grid">
+    <div class="review">“Best biryani ever!” ⭐⭐⭐⭐⭐</div>
+    <div class="review">“Amazing taste & service” ⭐⭐⭐⭐</div>
+    <div class="review">“Worth every rupee” ⭐⭐⭐⭐⭐</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="fade">
+  <h2>📞 Contact</h2>
+  <p>Owner: Kishan Kumar</p>
+  <p>Phone: 7488690713</p>
+  <p>Email: kishank7488@gmail.com</p>
+</section>
+
+<!-- WHATSAPP -->
+<a class="float-wa" href="https://wa.me/917488690713">💬</a>
 
 <script>
 let invoiceData = {};
@@ -129,7 +207,6 @@ function scrollToSection(id){
 }
 
 function placeOrder(){
-
   let itemData = document.getElementById("item").value.split("|");
   let name = itemData[0];
   let price = parseInt(itemData[1]);
@@ -142,7 +219,6 @@ function placeOrder(){
   let delivery = 50;
   let total = subtotal + gst + delivery;
 
-  // store data for PDF
   invoiceData = {name, qty, subtotal, gst, delivery, total};
 
   document.getElementById("invoice").innerHTML = `
@@ -155,7 +231,7 @@ function placeOrder(){
     <b>Total: ₹${total.toFixed(2)}</b>
   `;
 
-  let msg = `Order:%0A${name}%0AQty:${qty}%0ATotal:₹${total.toFixed(2)}`;
+  let msg = `Order:%0A${name}%0AQty:${qty}%0ANote:${note}%0ATotal:₹${total.toFixed(2)}`;
   window.open(`https://wa.me/917488690713?text=${msg}`);
 
   let upi = `upi://pay?pa=7488690713@ptyes&am=${total.toFixed(2)}&cu=INR`;
@@ -168,7 +244,7 @@ function downloadPDF(){
 
   doc.text("Mohak Biryani Invoice", 20, 20);
   doc.text(`Item: ${invoiceData.name}`, 20, 40);
-  doc.text(`Quantity: ${invoiceData.qty}`, 20, 50);
+  doc.text(`Qty: ${invoiceData.qty}`, 20, 50);
   doc.text(`Subtotal: ₹${invoiceData.subtotal}`, 20, 60);
   doc.text(`GST: ₹${invoiceData.gst}`, 20, 70);
   doc.text(`Delivery: ₹50`, 20, 80);
@@ -178,7 +254,6 @@ function downloadPDF(){
 }
 
 const faders = document.querySelectorAll('.fade');
-
 window.addEventListener('scroll', () => {
   faders.forEach(el => {
     if(el.getBoundingClientRect().top < window.innerHeight - 100){
